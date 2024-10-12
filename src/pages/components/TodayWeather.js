@@ -7,14 +7,17 @@ export default function TodayWeather(props) {
   const [data, setData] = useState(props.data);
   return (
     <div>
-      {(data && data.cod === 200) ? (
-        <div>
+      {data && data.cod === 200 ? (
+        <div className="dark:text-white text-black">
           <div className="flex flex-col gap-y-2">
             <div>Today&apos;s Weather</div>
-            <div className="text-7xl md:text-9xl dark:text-black text-violet-700">
+            <div className="text-7xl md:text-9xl dark:text-white text-violet-700">
               {Math.round(data.main.temp - 273.15)}°
             </div>
-            <div>H: {Math.round(data.main.temp_max - 273.15)}° L:{Math.round(data.main.temp_min - 273.15)}°</div>
+            <div>
+              H: {Math.round(data.main.temp_max - 273.15)}° L:
+              {Math.round(data.main.temp_min - 273.15)}°
+            </div>
           </div>
           <div>
             <Image
@@ -24,7 +27,9 @@ export default function TodayWeather(props) {
             />
           </div>
           <div className="flex gap-x-4 justify-between flex-wrap">
-            <div className="font-bold">{data.name}, {data.sys.country}</div>
+            <div className="font-bold">
+              {data.name}, {data.sys.country}
+            </div>
             <div className="flex flex-col-reverse sm:flex-row justify-between gap-x-8 items-end">
               <div>{data.date_time}</div>
               <div>Humidity: {data.main.humidity}%</div>
@@ -33,7 +38,9 @@ export default function TodayWeather(props) {
           </div>
         </div>
       ) : (
-        <div>Please input valid city or country</div>
+        <div className="dark:text-white text-black">
+          Please input valid city or country
+        </div>
       )}
     </div>
   );

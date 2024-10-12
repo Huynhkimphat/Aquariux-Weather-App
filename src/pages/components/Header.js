@@ -10,6 +10,10 @@ export default function Header(props) {
     setValue(event.target.value);
   };
 
+  const handleChangeTheme = ()=>{
+    document.documentElement.classList.toggle('dark');
+  }
+
   useEffect(() => {
     setValue(props.input);
   }, [props.input]);
@@ -38,7 +42,7 @@ export default function Header(props) {
           onChange={handleChange}
         />
       </div>
-      <button className="dark:bg-violet-950 bg-violet-600 p-4 rounded-xl hover:brightness-75 text-white">
+      <button className="dark:bg-violet-950 bg-violet-600 p-4 rounded-xl hover:brightness-75 text-white" onClick={()=>handleChangeTheme()}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

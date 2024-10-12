@@ -14,12 +14,12 @@ export default function SearchHistory(props) {
 
   const handleRemoveSearchHistoryItem = (index) => {
     const newArray = [...searchHistory];
-    newArray.splice(index, 1); 
-    props.removeSearchHistory(newArray.reverse()); 
+    newArray.splice(index, 1);
+    props.removeSearchHistory(newArray.reverse());
   };
 
   return (
-    <div className="w-[100%] dark:bg-violet-900 bg-violet-200 h-[100vh] overflow-scroll p-4 md:p-8 rounded-xl no-scrollbar">
+    <div className="w-[100%] dark:bg-violet-900 bg-violet-200 h-[100vh] dark:text-white text-black overflow-scroll p-4 md:p-8 rounded-xl no-scrollbar">
       <p className="text-xl pb-4">Search History</p>
       <div className="flex justify-between flex-col gap-y-4">
         {searchHistory &&

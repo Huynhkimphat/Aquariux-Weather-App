@@ -73,7 +73,9 @@ export default function Home() {
         <Header updateSearchKey={updateSearchKey} input={searchKey} />
         <div className="w-[100%] flex dark:bg-violet-800 opacity-80 bg-violet-300 h-[70vh] rounded-xl md:p-10 p-4 relative flex-col gap-y-10">
           {isLoading ? (
-            <p>Loading weather data...</p>
+            <p className="dark:text-white text-black">
+              Loading weather data...
+            </p>
           ) : (
             <TodayWeather data={weatherDetail} />
           )}
@@ -84,7 +86,7 @@ export default function Home() {
           />
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center dark:text-white text-black">
         Make by HKP
       </footer>
     </div>
