@@ -20,6 +20,31 @@ export default function Home() {
   const [weatherDetail, setWeatherDetail] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [searchHistory, setSearchHistory] = useState([]);
+  const [theme, setTheme] = useState("");
+
+  const handleChangeTheme = () => {
+    if (localStorage.getItem("color-theme")) {
+      if (localStorage.getItem("color-theme") === "light") {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("color-theme", "dark");
+        setTheme(localStorage.getItem("color-theme"));
+      } else {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("color-theme", "light");
+        setTheme(localStorage.getItem("color-theme"));
+      }
+    } else {
+      if (document.documentElement.classList.contains("dark")) {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("color-theme", "light");
+        setTheme(localStorage.getItem("color-theme"));
+      } else {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("color-theme", "dark");
+        setTheme(localStorage.getItem("color-theme"));
+      }
+    }
+  };
 
   const fetchWeatherData = async (key) => {
     if (key === "") {
@@ -57,6 +82,21 @@ export default function Home() {
     fetchWeatherData(searchKey);
   }, [searchKey]);
 
+  useEffect(() => {
+    if (localStorage.getItem("color-theme")) {
+      const theme = localStorage.getItem("color-theme");
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.add("light");
+      }
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("color-theme", "dark");
+      setTheme(localStorage.getItem("color-theme"));
+    }
+  }, []);
+
   const updateSearchKey = (key) => {
     setSearchKey(key);
   };
@@ -67,10 +107,15 @@ export default function Home() {
 
   return (
     <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-start justify-items-center min-h-screen p-8 font-[family-name:var(--font-geist-sans)]`}
+      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-start justify-items-center min-h-screen p-8 font-[family-name:var(--font-geist-sans)] dark:bg-[url('../assets/bg-dark.png')] bg-[url('../assets/bg-light.png')]`}
     >
       <main className=" w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%]  flex flex-col gap-y-36 row-start-2 items-start sm:items-start">
-        <Header updateSearchKey={updateSearchKey} input={searchKey} />
+        <Header
+          input={searchKey}
+          updateSearchKey={updateSearchKey}
+          theme={theme}
+          changeTheme={handleChangeTheme}
+        />
         <div className="w-[100%] flex dark:bg-violet-800 opacity-80 bg-violet-300 h-[70vh] rounded-xl md:p-10 p-4 relative flex-col gap-y-10">
           {isLoading ? (
             <p className="dark:text-white text-black">

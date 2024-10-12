@@ -39,7 +39,7 @@ export default function TodayWeather(props) {
         </div>
       ) : (
         <div className="dark:text-white text-black">
-          Please input valid city or country
+          Please input city or country
         </div>
       )}
     </div>
